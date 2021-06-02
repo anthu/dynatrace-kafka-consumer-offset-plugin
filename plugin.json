@@ -1,0 +1,119 @@
+{
+  "name": "custom.remote.python.kafka-client-offsets",
+  "version": "0.18",
+  "type": "python",
+  "entity": "CUSTOM_DEVICE",
+  "metricGroup": "tech.Kafka_Offsets",
+  "technologies": ["KAFKA"],
+  "favicon": "https://lh3.googleusercontent.com/gN6iBKP1b2GTXZZoCxhyXiYIAh8QJ_8xzlhEK6csyDadA4GdkEdIEy9Bc8s5jozt1g=w300",
+  "source": {
+    "package": "kafka_offset_activegate_plugin",
+    "className": "KafkaOffsetPlugin",
+    "install_requires": ["kafka-python>=2.0.2"],
+    "activation": "Remote"
+  },
+  "metrics": [
+    {
+      "entity": "CUSTOM_DEVICE",
+      "timeseries": {
+        "key": "consumer.offset",
+        "unit": "Count",
+        "dimensions": ["partition"],
+        "displayname": "Consumer Offset"
+      }
+    },
+    {
+      "entity": "CUSTOM_DEVICE",
+      "timeseries": {
+        "key": "consumer.lag",
+        "unit": "Count",
+        "dimensions": ["partition"],
+        "displayname": "Consumer Lag"
+      }
+    },
+    {
+      "entity": "CUSTOM_DEVICE_GROUP",
+      "timeseries": {
+        "key": "topic.highwater",
+        "unit": "Count",
+        "dimensions": ["partition"],
+        "displayname": "Topic Highwater"
+      }
+    },
+    {
+      "entity": "CUSTOM_DEVICE",
+      "timeseries": {
+        "key": "topic.lowwater",
+        "unit": "Count",
+        "dimensions": ["partition"],
+        "displayname": "Topic Lowater"
+      }
+    }
+  ],
+  "properties" : [
+    {
+	    "key" : "bootstrap_servers",
+      "type" :  "String"
+    }
+  ],
+  "configUI": {
+    "displayName": "Kafka Offset Extension",
+    "properties": [
+      {
+        "key" : "bootstrap_servers",
+        "displayName" :  "Bootstrap Servers",
+        "displayHint": "kafka.kafka.svc.cluster.local:9092" 
+      }
+    ]
+  },
+    "ui": {
+      "keymetrics" : [
+        {
+          "key": "consumer.lag",
+          "aggregation": "sum",
+          "mergeaggregation": "sum",
+          "displayname": "Total Consumer Lag"
+        }
+      ],
+      "keycharts" : [
+        {
+          "title": "Consumer Lag",
+          "group": "Consumer Metrics",
+          "series": [
+            {
+              "key": "consumer.lag",
+              "displayname": "Consumer Lag",
+              "seriestype": "line",
+              "stacked": true,
+              "color": "#7ed0fc",
+              "rightaxis": false
+            }
+          ]
+        }
+      ],
+      "charts": [
+        {
+          "group": "Kafka",
+          "title": "Consumer Metrics",
+          "series": [
+            {
+              "key": "consumer.offset",
+              "displayname": "Consumer Offset",
+              "seriestype": "bar",
+              "stacked": true,
+              "color": "#7ed0fc",
+              "rightaxis": false
+            },
+            {
+              "key": "consumer.lag",
+              "displayname": "Consumer Lag",
+              "seriestype": "bar",
+              "stacked": true,
+              "color": "#7ed0fc",
+              "rightaxis": true
+            }
+          ]
+        }
+      ]
+    }
+}
