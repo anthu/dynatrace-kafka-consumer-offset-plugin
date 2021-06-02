@@ -140,6 +140,7 @@ class KafkaOffsetReader():
         'bootstrap_servers': config["bootstrap_servers"],
         'group_id': None,
         'auto_offset_reset': 'earliest',
+        'reset_offset_on_start': True,
         'consumer_timeout_ms': 500,
         'security_protocol': 'PLAINTEXT'
     }

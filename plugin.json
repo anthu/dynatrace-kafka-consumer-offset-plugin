@@ -1,6 +1,6 @@
 {
   "name": "custom.remote.python.kafka-client-offsets",
-  "version": "0.22",
+  "version": "0.23",
   "type": "python",
   "entity": "CUSTOM_DEVICE",
   "metricGroup": "tech.Kafka_Offsets",
@@ -106,7 +106,7 @@
               "key": "consumer.lag",
               "displayname": "Total Consumer Lag",
               "seriestype": "line",
-              "stacked": true,
+              "stacked": false,
               "mergeaggregation": "sum",
               "color": "#e53935",
               "rightaxis": true
