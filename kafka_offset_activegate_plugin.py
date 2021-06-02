@@ -118,11 +118,10 @@ class KafkaOffsetReader():
 
             self.topics.add(topic)
 
-            update_offsets = dict()
-            update_offsets[topic] = dict()
-            update_offsets[topic][group] = dict()
-            update_offsets[topic][group][partition] = offset
-            self.offsets.update(update_offsets)
+            self.offsets = ensure_dict_key(self.offsets, group, {})
+            self.offsets[group] = ensure_dict_key(self.offsets[group], topic, {})
+            self.offsets[group][topic] = ensure_dict_key(self.offsets[group][topic], partition, offset)
+            self.offsets[group][topic][partition] = offset
 
             self.commits = ensure_dict_key(self.commits, topic, {})
             self.commits[topic] = ensure_dict_key(self.commits[topic], partition, {})

@@ -1,6 +1,6 @@
 {
   "name": "custom.remote.python.kafka-client-offsets",
-  "version": "0.18",
+  "version": "0.21",
   "type": "python",
   "entity": "CUSTOM_DEVICE",
   "metricGroup": "tech.Kafka_Offsets",
@@ -81,12 +81,35 @@
           "group": "Consumer Metrics",
           "series": [
             {
-              "key": "consumer.lag",
-              "displayname": "Consumer Lag",
+              "key": "consumer.offset",
+              "displayname": "Consumer Offset",
+              "dimesions": [
+                "partition"
+              ],
               "seriestype": "line",
               "stacked": true,
               "color": "#7ed0fc",
               "rightaxis": false
+            },
+            {
+              "key": "consumer.lag",
+              "displayname": "Consumer Lag",
+              "seriestype": "line",
+              "dimesions":[
+                "partition"
+              ],
+              "stacked": true,
+              "color": "#ffd54f",
+              "rightaxis": true
+            },
+            {
+              "key": "consumer.lag",
+              "displayname": "Total Consumer Lag",
+              "seriestype": "line",
+              "stacked": true,
+              "mergeaggregation": "sum",
+              "color": "#e53935",
+              "rightaxis": true
             }
           ]
         }
@@ -99,7 +122,7 @@
             {
               "key": "consumer.offset",
               "displayname": "Consumer Offset",
-              "seriestype": "bar",
+              "seriestype": "line",
               "stacked": true,
               "color": "#7ed0fc",
               "rightaxis": false
@@ -107,9 +130,9 @@
             {
               "key": "consumer.lag",
               "displayname": "Consumer Lag",
-              "seriestype": "bar",
+              "seriestype": "line",
               "stacked": true,
-              "color": "#7ed0fc",
+              "color": "#e53935",
               "rightaxis": true
             }
           ]
