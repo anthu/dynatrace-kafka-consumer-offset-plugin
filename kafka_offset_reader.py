@@ -18,7 +18,6 @@ class KafkaOffsetReader():
       'bootstrap_servers': config["bootstrap_servers"],
       'group_id': None,
       'auto_offset_reset': 'earliest',
-      'reset_offset_on_start': True,
       'consumer_timeout_ms': 500,
       'security_protocol': 'PLAINTEXT'
     }
@@ -66,11 +65,8 @@ class KafkaOffsetReader():
     return self.offsets
 
   def get_highwater(self):
-    if (len(self.topics) == 0):
-      self.topics.add("heartbeat")
-    topic_list = list(self.topics)
-    con = KafkaConsumer(*topic_list, bootstrap_servers = self.bootstrap_servers)
-    
+    con = KafkaConsumer(bootstrap_servers = self.bootstrap_servers)
+
     highwaters = dict()
     for topic in list(self.topics):
       ps = [TopicPartition(topic, p) for p in con.partitions_for_topic(topic)]

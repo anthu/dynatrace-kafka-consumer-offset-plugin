@@ -1,6 +1,6 @@
 {
   "name": "custom.remote.python.kafka-client-offsets",
-  "version": "0.25",
+  "version": "0.36",
   "type": "python",
   "entity": "CUSTOM_DEVICE",
   "metricGroup": "tech.Kafka_Offsets",
@@ -18,7 +18,10 @@
       "timeseries": {
         "key": "consumer.offset",
         "unit": "Count",
-        "dimensions": ["partition"],
+        "dimensions": [
+          "partition",
+          "consumer_group"
+        ],
         "displayname": "Consumer Offset"
       }
     },
@@ -27,7 +30,10 @@
       "timeseries": {
         "key": "consumer.lag",
         "unit": "Count",
-        "dimensions": ["partition"],
+        "dimensions": [
+          "partition",
+          "consumer_group"
+        ],
         "displayname": "Consumer Lag"
       }
     },
@@ -110,7 +116,7 @@
               "key": "consumer.offset",
               "displayname": "Consumer Offset",
               "dimesions": [
-                "partition"
+                "consumer_group"
               ],
               "seriestype": "line",
               "stacked": true,
@@ -121,7 +127,7 @@
               "key": "consumer.lag",
               "displayname": "Consumer Lag",
               "dimesions": [
-                "partition"
+                "consumer_group"
               ],
               "seriestype": "line",
               "stacked": true,
