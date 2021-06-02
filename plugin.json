@@ -1,6 +1,6 @@
 {
   "name": "custom.remote.python.kafka-client-offsets",
-  "version": "0.21",
+  "version": "0.22",
   "type": "python",
   "entity": "CUSTOM_DEVICE",
   "metricGroup": "tech.Kafka_Offsets",
